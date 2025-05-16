@@ -4,6 +4,9 @@ vim.keymap.set("v", "<space>x", ":lua<CR>")
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 vim.keymap.set("n", "<space>x", ":.lua<CR>")
 vim.keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
+vim.keymap.set("n","<space>i","gg=G", opts)
+
+
 
 -- keymap for new tabs
 vim.keymap.set("n", "te", "tabedits", opts)
@@ -38,6 +41,10 @@ vim.keymap.set("n", "<space>m", "<cmd>Mason<CR>", opts)
 
 -- keymao for Termial;
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+
+
+--keymap for telescope Undo
+vim.keymap.set("n","<space>u","<cmd>Telescope undo<cr>")
 
 -- keymap binding for terminal
 vim.keymap.set("n", "<space>st", function()

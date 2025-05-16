@@ -10,6 +10,7 @@ return {
     },
     opts = {
       popup_border_style = "rounded",
+      enable_git_status = false,
       window = {
         position = "left",
         width = 30,
