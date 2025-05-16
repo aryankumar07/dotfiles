@@ -1,4 +1,3 @@
--- WezTerm Keybindings Documentation by dragonlobster 
 -- ===================================================
 -- Leader Key:
 -- The leader key is set to ALT + q, with a timeout of 2000 milliseconds (2 seconds).
@@ -51,11 +50,32 @@ end
 
 -- For example, changing the color scheme:
 config.color_scheme = "Catppuccin Macchiato"
-config.font =
-wezterm.font("Fira Code")
+config.font = wezterm.font("Fira Code")
 config.font_size = 16
+config.line_height = 1.3
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 
 config.window_decorations = "RESIZE"
+
+config.background = {
+  {
+    source = {
+      File = "/Users/aryankumar/dotfiles/.config/wezterm/backgrounds/elegant.png",
+    },
+    width = "Contain",
+    hsb = {
+      hue = 0.1,
+      saturation = 0.1,
+      brightness = 0.3,
+    }
+  },
+}
+
 
 -- tmux
 config.leader = { key = "q", mods = "ALT", timeout_milliseconds = 2000 }
