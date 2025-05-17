@@ -1,0 +1,8 @@
+brew "cmake"
+brew "curl"
+brew "gettext"
+brew "ninja"
+brew "starship"
+brew "stow"
+cask "font-fira-code"
+cask "wezterm"

@@ -65,7 +65,7 @@ config.window_decorations = "RESIZE"
 config.background = {
   {
     source = {
-      File = "/Users/aryankumar/dotfiles/.config/wezterm/backgrounds/elegant.png",
+      File = "/Users/tarnished/dotfiles/.config/wezterm/backgrounds/elegant.png",
     },
     width = "Contain",
     hsb = {
