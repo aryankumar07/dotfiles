@@ -62,10 +62,13 @@ config.window_padding = {
 
 config.window_decorations = "RESIZE"
 
+local home = os.getenv("HOME")
+local file = home .. "/.config/wezterm/backgrounds/elegant.png"
+
 config.background = {
   {
     source = {
-      File = "/Users/tarnished/dotfiles/.config/wezterm/backgrounds/elegant.png",
+      File = file,
     },
     width = "Contain",
     hsb = {
