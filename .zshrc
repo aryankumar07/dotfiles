@@ -50,10 +50,16 @@ source ~/scripts/eza/eza.sh
 alias gt="git"
 alias ga="git add ."
 alias gs="git status -s"
-alias gc='git commit -m'
-alias glog='git log --oneline --graph --all'
+alias gc='git commit'
+alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
 alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
-
+alias gp="git push"
+alias gu="git pull"
+alias gb="git branch"
+alias gi="git init"
+alias gcl="git clone"
+alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
+alias gap='ga --patch'
 
 
 
