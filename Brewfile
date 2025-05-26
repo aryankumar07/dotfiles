@@ -1,6 +1,3 @@
-# specify a directory to install
-cask_args appdir: '/Applications'
-# brew
 brew "bat"
 brew "cbonsai"
 brew "cmake"
@@ -9,12 +6,13 @@ brew "eza"
 brew "fd"
 brew "fzf"
 brew "gettext"
+brew "gnupg"
+brew "go"
 brew "neofetch"
 brew "ninja"
+brew "pinentry-mac"
 brew "starship"
 brew "stow"
 brew "yazi"
 brew "zoxide"
-#cask
 cask "font-fira-code"
-cask "wezterm"
