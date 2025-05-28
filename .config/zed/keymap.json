@@ -1,0 +1,182 @@
+[
+  {
+    "bindings": {
+      "ctrl-shift-w": null,
+      "ctrl-q": "pane::CloseActiveItem",
+      "ctrl-b": "workspace::ToggleLeftDock",
+      // Tabs
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePrevItem",
+      // Projects
+      "ctrl-o": "projects::OpenRecent",
+      "ctrl-shift-o": "workspace::Open",
+      // Search
+      "ctrl-f": "vim::Search",
+      "ctrl-shift-f": "pane::DeploySearch",
+      // AI
+      // Toggle right dock panel
+      "ctrl-e": "workspace::ToggleRightDock",
+      // Navigate to previous AI suggestion
+      "ctrl-[": "copilot::PreviousSuggestion",
+      // Navigate to next AI suggestion
+      "ctrl-]": "copilot::NextSuggestion",
+      // Manually trigger AI suggestions
+      "ctrl-shift-space": "copilot::Suggest",
+      // Global file finder
+      "f": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // Restore "f"
+      "f": [
+        "vim::PushOperator",
+        {
+          "FindForward": {
+            "before": false
+          }
+        }
+      ],
+      // Ctrl+W to delete word
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+      // Multi-cursor
+      "ctrl-up": "editor::AddSelectionAbove",
+      "ctrl-down": "editor::AddSelectionBelow",
+      // Copy paste
+      "ctrl-c": "editor::Copy",
+      "ctrl-v": "editor::Paste",
+      "ctrl-x": "editor::Cut"
+    }
+  },
+  {
+    // Reset global one-char hotkeys
+    "context": "vim_mode == insert || mode == single_line || Terminal || mode == auto_height",
+    "bindings": {
+      "[": null,
+      "]": null,
+      "f": null
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      // WASD movements
+      "w": "vim::Up",
+      "s": "vim::Down",
+      "a": "vim::Left",
+      "d": "vim::Right",
+      // Move by word with capital A/D
+      "A": "vim::PreviousWordStart",
+      "D": "vim::NextWordEnd",
+      // Move by 5 lines with W/S
+      "W": [
+        "workspace::SendKeystrokes",
+        "5 w"
+      ],
+      "S": [
+        "workspace::SendKeystrokes",
+        "5 s"
+      ],
+      // Q/E to move to start/end of line
+      "q": "vim::FirstNonWhitespace",
+      "e": "vim::EndOfLine",
+      "Q": "vim::InsertFirstNonWhitespace",
+      "E": "vim::InsertEndOfLine",
+      // Ctrl+W to delete word
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+      // Modifications
+      "x": "vim::HelixDelete",
+      "U": "vim::Redo",
+      // Jumps
+      "j": "pane::GoBack",
+      "J": "pane::GoForward",
+      "g e": "vim::StartOfDocument",
+      "g r": "editor::GoToDefinitionSplit",
+      "g f": "editor::OpenExcerpts",
+      "g F": "editor::OpenExcerptsSplit",
+      // Excerpts (TODO)
+      "z w": "editor::ExpandExcerptsUp",
+      "z s": "editor::ExpandExcerptsDown",
+      // Multi-cursor
+      "ctrl-up": "editor::AddSelectionAbove",
+      "ctrl-down": "editor::AddSelectionBelow",
+      "C": "editor::AddSelectionBelow",
+      "v": "vim::ToggleVisualLine",
+      "ctrl-d": [
+        "editor::SelectNext",
+        {
+          "replace_newest": false
+        }
+      ],
+      "l": "editor::SplitSelectionIntoLines",
+      // Visual mode
+      "ctrl-shift-v": "vim::ToggleVisual"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      // Pickers
+      "space f": "file_finder::Toggle",
+      "space d": "editor::GoToDiagnostic",
+      "space D": "diagnostics::Deploy",
+      "space a": "editor::ToggleCodeActions",
+      "space s": "outline::Toggle",
+      // Indentation
+      ">": "vim::Indent",
+      "<": "editor::TabPrev",
+      // Panes
+      "[": [
+        "workspace::ActivatePaneInDirection",
+        "Left"
+      ],
+      "]": [
+        "workspace::ActivatePaneInDirection",
+        "Right"
+      ],
+      // Help
+      "h": "editor::Hover",
+      // AI
+      "shift-enter": "assistant::InlineAssist",
+      // Selection
+      "\"": [
+        "workspace::SendKeystrokes",
+        "ctrl-shift-v i \""
+      ]
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    // TODO: clipboard make c and p not touch the clipboard (only x should do it)
+    "bindings": {
+      "y": "vim::YankLine",
+      // Vim-like Modifications
+      "c w": [
+        "workspace::SendKeystrokes",
+        "ctrl-d c"
+      ],
+      "c c": [
+        "workspace::SendKeystrokes",
+        "v c"
+      ]
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "y": "vim::VisualYank",
+      // AI
+      "r": "assistant::InlineAssist"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      // Bash-like: Ctrl+A / Ctrl+E to move to start/end of file
+      "ctrl-a": "vim::FirstNonWhitespace"
+      // Conflicts with AI
+      // "ctrl-e": "vim::EndOfLine"
+    }
+  }
+]
