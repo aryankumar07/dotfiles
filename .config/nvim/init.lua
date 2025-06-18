@@ -2,6 +2,7 @@ print("Found the INIT.lua ile and source it")
 require("config.lazy")
 require("config.keybinding")
 require("config.options")
+require("config.colorschemes.colorscheme")
 --vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
 --vim.cmd [[highlight NonText guibg=NONE ctermbg=NONE]]
 

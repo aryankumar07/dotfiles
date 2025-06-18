@@ -58,6 +58,7 @@ alias gu="git pull"
 alias gb="git branch"
 alias gi="git init"
 alias gcl="git clone"
+alias gcd="git clone --depth 1"
 alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
 alias gap='ga --patch'
 
@@ -70,3 +71,14 @@ alias e="exit"
 alias nv="nvim"
 alias src="source .zshrc"
 alias ff="yazi"
+
+
+
+# alias for switching node
+swn() {
+  unset -f nvm
+  export PATH="/usr/local/bin:$(echo $PATH | tr ':' '\n' | grep -v '.nvm' | tr '\n' ':')"
+  hash -r
+  which node
+  node -v
+}

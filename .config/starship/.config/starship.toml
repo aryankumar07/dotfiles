@@ -191,8 +191,8 @@ format = '[[ $symbol( $version) ]]($style)'
 
 [python]
 symbol = ""
-
-format = '[[ $symbol( $version) ]]($style)'
+style = "yellow"
+format = "[$symbol($version)]($style) "
 
 
 [docker_context]
