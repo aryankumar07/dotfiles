@@ -6,6 +6,9 @@ require("config.colorschemes.colorscheme")
 --vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
 --vim.cmd [[highlight NonText guibg=NONE ctermbg=NONE]]
 
+
+vim.o.termguicolors = true
+
 vim.api.nvim_set_hl(0, "YankHighlight", { bg = "#ADD8E6", fg = "#0000FF" })
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlighting your yanking (coying) text",
