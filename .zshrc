@@ -2,6 +2,11 @@
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=$HOME/.config/starship/.config/starship.toml
 
+
+#Go path
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
+
 # curl path
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
@@ -11,6 +16,11 @@ export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# bun path
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 
 
@@ -52,6 +62,7 @@ alias ga="git add ."
 alias gs="git status -s"
 alias gc='git commit'
 alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
+alias glp='git --no-pager log --oneline --parents --graph'
 alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
 alias gp="git push"
 alias gu="git pull"
@@ -72,8 +83,21 @@ alias nv="nvim"
 alias src="source .zshrc"
 alias ff="yazi"
 
+# source for mergeing files and folders
+alias merge="~/scripts/mergerer/merge.sh"
 
 
 # alias for switching node
 source ~/scripts/nvm-manger/index.sh
 
+# alias and scripts for tmux
+alias td="tmux detach"
+alias tl="tmux ls"
+source ~/scripts/tmux/index.sh
+
+# source for starting rust
+source "$HOME/.cargo/env"
+
+
+
+export PATH="$HOME/.local/bin:$PATH"

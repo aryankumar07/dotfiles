@@ -1,1 +1,16 @@
 .tmux/plugins/*
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Generated / runtime
+.config/raycast/extensions/node_modules
+.config/cagent/.cagent_first_run
+.config/mole/operations.log
+.config/mole/mole.log
+
+# Sensitive (contains auth tokens)
+.config/gh/hosts.yml

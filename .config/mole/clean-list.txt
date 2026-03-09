@@ -1,0 +1,77 @@
+# Mole Cleanup Preview - 2026-02-22 14:45:15
+#
+# How to protect files:
+# 1. Copy any path below to ~/.config/mole/whitelist
+# 2. Run: mo clean --whitelist
+#
+# Example:
+#   /Users/*/Library/Caches/com.example.app
+#
+
+
+=== User essentials ===
+/Users/tarnished/Library/Caches  # 14.54GB, 41 items
+/Users/tarnished/Library/Logs  # 2.7MB, 8 items
+
+=== App caches ===
+/Users/tarnished/Library/Suggestions  # 18.9MB, 19 items
+
+=== Browsers ===
+/Users/tarnished/Library/Caches/com.apple.Safari/WebKitCache  # 4KB
+/Users/tarnished/Library/Caches/Google/Chrome/Default  # 718.9MB
+/Users/tarnished/Library/Application Support/Google/Chrome/Default/GPUCache  # 5.7MB, 12 items
+/Users/tarnished/Library/Application Support/Google/Chrome/component_crx_cache  # 33.1MB, 19 items
+/Users/tarnished/Library/Application Support/Google/GoogleUpdater/crx_cache  # 681.3MB, 3 items
+/Users/tarnished/Library/Application Support/Google/GoogleUpdater  # 2.0MB, 2 items
+/Users/tarnished/.cache/puppeteer  # 951.8MB, 2 items
+/Users/tarnished/Library/Caches/company.thebrowser.Browser  # 286KB, 3 items
+
+=== Cloud & Office ===
+
+=== Developer tools ===
+/Users/tarnished/.npm/_cacache  # 7.47GB, 2 items
+/Users/tarnished/.npm/_npx  # 432.0MB, 13 items
+/Users/tarnished/.npm/_logs  # 7.4MB, 22 items
+/Users/tarnished/.npm/_prebuilds  # 1.5MB, 2 items
+/Users/tarnished/Library/pnpm/store  # 3.27GB, 2 items
+/Users/tarnished/.bun/install/cache  # 1.27GB, 1420 items
+/Users/tarnished/.cache/uv  # 351.2MB, 6 items
+/Users/tarnished/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f  # 2.6MB
+/Users/tarnished/Library/Caches/com.postmanlabs.mac  # 80KB, 2 items
+/Users/tarnished/Library/Caches/SentryCrash  # 8KB, 2 items
+/Users/tarnished/Library/Application Support/Code/logs  # 1.9MB, 10 items
+/Users/tarnished/Library/Application Support/Code/Cache  # 68.6MB, 2 items
+/Users/tarnished/Library/Application Support/Code/CachedData  # 21.5MB, 2 items
+/Users/tarnished/Library/Caches/Homebrew  # 453.1MB, 70 items
+
+=== Applications ===
+/Users/tarnished/Library/Application Support/Code/logs  # 1.9MB, 10 items
+/Users/tarnished/Library/Application Support/Code/Cache  # 68.6MB, 2 items
+/Users/tarnished/Library/Application Support/Code/CachedData  # 21.5MB, 2 items
+/Users/tarnished/Library/Application Support/discord/Cache/Cache_Data  # 999.4MB
+/Users/tarnished/.zcompdump  # 49KB
+/Users/tarnished/.lesshst  # 1KB
+
+=== Virtualization ===
+
+=== Application Support ===
+
+=== Orphaned data ===
+/Users/tarnished/Library/Caches/com.cluely.app.ShipIt  # 24KB
+/Users/tarnished/Library/Caches/com.hackemist.SDImageCache  # 48KB
+/Users/tarnished/Library/Caches/io.sentry  # 8KB
+
+=== Apple Silicon updates ===
+
+=== Device backups ===
+
+=== Time Machine ===
+
+=== Large files ===
+
+# ============================================
+# Summary
+# ============================================
+# Potential cleanup: 34.28GB
+# Items: 2330
+# Categories: 38

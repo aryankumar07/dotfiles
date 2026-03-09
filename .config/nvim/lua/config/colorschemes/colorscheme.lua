@@ -1,7 +1,7 @@
 return {
   {
     "folke/tokyonight.nvim",
-    enabled = false,
+    enabled = true,
     config = function()
       vim.cmd [[colorscheme tokyonight]]
     end
@@ -17,7 +17,7 @@ return {
   },
   {
     "rose-pine/neovim",
-    enabled = true,
+    enabled = false,
     name = "rose-pine",
     config = function()
       vim.cmd("colorscheme rose-pine")
@@ -30,5 +30,5 @@ return {
     config = function()
       vim.cmd("colorscheme gruvbox")
     end
-  }
+  },
 }

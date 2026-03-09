@@ -6,6 +6,15 @@ require("config.colorschemes.colorscheme")
 --vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
 --vim.cmd [[highlight NonText guibg=NONE ctermbg=NONE]]
 
+-- 1. Enable autoread
+vim.o.autoread = true
+
+-- 2. Trigger checktime when files are changed externally
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+
 
 vim.o.termguicolors = true
 

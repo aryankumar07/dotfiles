@@ -162,9 +162,6 @@ format = '[ $symbol( $version) ]($style)'
 symbol = " "
 format = '[[ $symbol( $version) ]]($style)'
 
-[rust]
-symbol = ""
-format = '[[ $symbol( $version) ]]($style)'
 
 [golang]
 symbol = ""
@@ -175,9 +172,14 @@ detect_files = ["go.mod"]
 symbol = ""
 format = '[[ $symbol( $version) ]]($style)'
 
+
 [java]
 symbol = " "
-format = '[[ $symbol( $version) ]]($style)'
+style = "red"
+format = "[$symbol($version)]($style)"
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
+detect_extensions = ["java"]
+detect_folders = [".idea"]
 
 [kotlin]
 symbol = ""
@@ -198,6 +200,10 @@ format = "[$symbol($version)]($style) "
 [docker_context]
 symbol = ""
 format = '[ $symbol( $context) ]($style)'
+
+[rust]
+symbol = " " 
+format = "[$symbol$version]($style)"
 
 
 [time]
