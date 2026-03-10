@@ -2,128 +2,167 @@
 
 set -e
 
-# Functions 
+DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_REPO="https://github.com/aryankumar07/dotfiles.git"
 
-proceed() {
-  read -p "$1 (y/n) : " flag
-  if [[ "$flag" == "y" || "$flag" == "Y" ]]
-  then
-    echo "Proceed confirmed"
-    return 0
-  else
-    echo "Sad to be canceled"
-    exit 1
-  fi
-}
+# ─── Helpers ──────────────────────────────────────────────────────────────────
 
-commandExists() {
-  if ! command -v "$1" &> /dev/null; then
-    echo "Error: $1 is not installed. Please install $1 and rerun the script."
-    exit 1
-  fi
-}
+info()    { printf "\033[1;34m[INFO]\033[0m  %s\n" "$1"; }
+success() { printf "\033[1;32m[OK]\033[0m    %s\n" "$1"; }
+warn()    { printf "\033[1;33m[SKIP]\033[0m  %s\n" "$1"; }
 
-buildNeoVimdependencies() {
-  echo "Building dependencies"
-  commandExists curl
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  echo "Done completed"
-}
+command_exists() { command -v "$1" &>/dev/null; }
 
-echo "🙏 Deep breaths, everything will (probably) be fine!"
-echo ""
+# ─── macOS: Xcode Command Line Tools ─────────────────────────────────────────
 
-# Install xCode cli tools
-echo "Checking if Working on macOS"
 if [[ "$(uname)" == "Darwin" ]]; then
-    echo "macOS detected..."
-    if xcode-select -p &>/dev/null; then
-        echo "Xcode already installed"
-    else
-        echo "Installing command line tools..."
-        xcode-select --install
-    fi
-fi
-
-commandExists git
-
-# Clone the dotfiles repository if it doesn't exist
-if [ ! -d "$HOME/dotfiles" ]; then
-  echo "Cloning dotfiles repository..."
-  if git clone https://github.com/aryankumar07/dotfiles.git "$HOME/dotfiles"; then
-    echo "Cloned successfully. One more step completed. Voila!"
+  if xcode-select -p &>/dev/null; then
+    warn "Xcode CLI tools already installed"
   else
-    echo "Error: Failed to clone the repository."
-    exit 1
+    info "Installing Xcode CLI tools..."
+    xcode-select --install
+    # Wait for install to finish before continuing
+    until xcode-select -p &>/dev/null; do
+      sleep 5
+    done
+    success "Xcode CLI tools installed"
   fi
-fi
-
-# Copy Brewfile if it exists
-if [ -f "$HOME/dotfiles/Brewfile" ]; then
-  echo "Copying Brewfile temporarily..."
-  cp "$HOME/dotfiles/Brewfile" "$HOME"
 else
-  echo "Warning: Brewfile not found in the dotfiles repository."
-fi
-
-# Homebrew installation
-if ! command -v brew &>/dev/null; then
-  echo "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-  echo "Homebrew already installed"
-fi
-
-brew analytics off
-
-commandExists brew
-
-# Run brew bundle only if Brewfile exists
-if [ -f "$HOME/Brewfile" ]; then
-  echo "Running brew bundle..."
-  brew bundle --file="$HOME/Brewfile"
-else
-  echo "Warning: No Brewfile found at $HOME"
-fi
-
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-
-echo "Brew installation completed. Hold your seats just at the end of the script"
-
-rm Brewfile
-
-proceed "Do you want to install Neovim?"
-
-buildNeoVimdependencies
-
-commandExists make
-
-mkdir -p /tmp/builds
-cd /tmp/builds
-
-if git clone https://github.com/neovim/neovim; then
-  cd neovim
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-  echo "Neovim has been installed"
-else
-  echo "Failed to clone Neovim repository"
+  echo "This script is designed for macOS. Exiting."
   exit 1
 fi
 
-# come back to Home repo
-cd "$HOME/dotfiles" || exit
+# ─── Clone dotfiles ──────────────────────────────────────────────────────────
 
-commandExists stow
+if [ -d "$DOTFILES_DIR/.git" ]; then
+  warn "Dotfiles repo already exists at $DOTFILES_DIR"
+else
+  info "Cloning dotfiles..."
+  git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+  success "Dotfiles cloned"
+fi
 
-echo "Stowing dotfiles..."
-stow .
+# ─── Homebrew ─────────────────────────────────────────────────────────────────
+
+if command_exists brew; then
+  warn "Homebrew already installed"
+else
+  info "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  success "Homebrew installed"
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+brew analytics off
+
+# ─── Brew Bundle ──────────────────────────────────────────────────────────────
+
+info "Running brew bundle (already-installed packages will be skipped)..."
+brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+success "Brew bundle complete"
+
+# ─── Stow dotfiles ───────────────────────────────────────────────────────────
+
+if command_exists stow; then
+  info "Stowing dotfiles..."
+  cd "$DOTFILES_DIR"
+  stow --adopt .
+  # Reset any adopted changes so dotfiles repo stays clean
+  git checkout .
+  success "Dotfiles stowed"
+else
+  echo "Error: stow not found after brew bundle. Something went wrong."
+  exit 1
+fi
+
+# ─── NVM (Node Version Manager) ──────────────────────────────────────────────
+
+export NVM_DIR="$HOME/.nvm"
+
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  warn "nvm already installed"
+else
+  info "Installing nvm..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  success "nvm installed"
+fi
+
+# Load nvm and install latest LTS node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+if command_exists node; then
+  warn "Node.js already installed ($(node -v))"
+else
+  info "Installing Node.js LTS via nvm..."
+  nvm install --lts
+  success "Node.js installed ($(node -v))"
+fi
+
+# ─── Bun ──────────────────────────────────────────────────────────────────────
+
+if command_exists bun; then
+  warn "Bun already installed ($(bun -v))"
+else
+  info "Installing Bun..."
+  curl -fsSL https://bun.sh/install | bash
+  success "Bun installed"
+fi
+
+# ─── Rust ─────────────────────────────────────────────────────────────────────
+
+if command_exists rustc; then
+  warn "Rust already installed ($(rustc --version))"
+else
+  info "Installing Rust via rustup..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  source "$HOME/.cargo/env"
+  success "Rust installed"
+fi
+
+# ─── Neovim (build from source) ──────────────────────────────────────────────
+
+if command_exists nvim; then
+  warn "Neovim already installed ($(nvim --version | head -1))"
+else
+  info "Building Neovim from source..."
+  NVIM_BUILD_DIR="/tmp/neovim-build"
+  rm -rf "$NVIM_BUILD_DIR"
+  mkdir -p "$NVIM_BUILD_DIR"
+  git clone --depth 1 https://github.com/neovim/neovim "$NVIM_BUILD_DIR"
+  cd "$NVIM_BUILD_DIR"
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+  cd "$DOTFILES_DIR"
+  rm -rf "$NVIM_BUILD_DIR"
+  success "Neovim installed ($(nvim --version | head -1))"
+fi
+
+# ─── Tmux Plugin Manager (TPM) ───────────────────────────────────────────────
+
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+
+if [ -d "$TPM_DIR" ]; then
+  warn "TPM already installed"
+else
+  info "Installing Tmux Plugin Manager..."
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  success "TPM installed — press prefix + I inside tmux to install plugins"
+fi
+
+# ─── Go CLI tools ────────────────────────────────────────────────────────────
+
+if command_exists cobra-cli; then
+  warn "cobra-cli already installed"
+else
+  info "Installing cobra-cli..."
+  go install github.com/spf13/cobra-cli@latest
+  success "cobra-cli installed"
+fi
+
+# ─── Done ─────────────────────────────────────────────────────────────────────
 
 echo ""
-echo "🤯 It actually worked!"
-echo "Log out and log back in (or just restart) to finish installing all ZSH features."
+success "All done! Log out and back in (or restart) to finish setting up your shell."
+echo "  - Open tmux and press prefix + I to install tmux plugins"
+echo "  - Open nvim to let lazy.nvim install plugins automatically"
