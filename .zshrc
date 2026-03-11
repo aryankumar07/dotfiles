@@ -1,31 +1,9 @@
-# Starship 
+# Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=$HOME/.config/starship/.config/starship.toml
 
 
-#Go path
-export GOPATH=$HOME/go
-export PATH="$PATH:$GOPATH/bin"
-
-# curl path
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-
-# nvm (node version manager)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-# bun path
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-
-
-# NOTE : FZF
-
+# FZF
 source <(fzf --zsh)
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
@@ -34,29 +12,24 @@ export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git
 
 export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
 
-# Setup fzf previews
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
 
-# fzf preview for tmux
-export FZF_TMUX_OPTS=" -p90%,70% "  
+export FZF_TMUX_OPTS=" -p90%,70% "
 
 source ~/scripts/fzf-git.sh/fzf-git.sh
 
 
-# NOTE: Zoxide
+# Zoxide
 eval "$(zoxide init zsh)"
-
 source ~/scripts/zoxide/z.sh
 
 
-# Next level of an ls 
-# options :  --no-filesize --no-time --no-permissions 
-# alias ls="eza --no-filesize --grid --color=always --icons=always --no-user" 
+# Eza
 source ~/scripts/eza/eza.sh
 
 
-# git aliases
+# Git aliases
 alias gt="git"
 alias ga="git add ."
 alias gs="git status -s"
@@ -74,30 +47,20 @@ alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
 alias gap='ga --patch'
 
 
-
-
-# other Aliases shortcuts
+# General aliases
 alias c="clear"
 alias e="exit"
 alias nv="nvim"
 alias src="source .zshrc"
 alias ff="yazi"
 
-# source for mergeing files and folders
 alias merge="~/scripts/mergerer/merge.sh"
 
 
-# alias for switching node
+# Node version switching
 source ~/scripts/nvm-manger/index.sh
 
-# alias and scripts for tmux
+# Tmux
 alias td="tmux detach"
 alias tl="tmux ls"
 source ~/scripts/tmux/index.sh
-
-# source for starting rust
-source "$HOME/.cargo/env"
-
-
-
-export PATH="$HOME/.local/bin:$PATH"

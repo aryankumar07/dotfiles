@@ -163,11 +163,6 @@ symbol = " "
 format = '[[ $symbol( $version) ]]($style)'
 
 
-[golang]
-symbol = ""
-format = '[ $symbol( $version) ]($style)'
-detect_files = ["go.mod"]
-
 [php]
 symbol = ""
 format = '[[ $symbol( $version) ]]($style)'

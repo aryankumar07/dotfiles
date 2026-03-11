@@ -34,7 +34,6 @@
 /Users/tarnished/.npm/_logs  # 7.4MB, 22 items
 /Users/tarnished/.npm/_prebuilds  # 1.5MB, 2 items
 /Users/tarnished/Library/pnpm/store  # 3.27GB, 2 items
-/Users/tarnished/.bun/install/cache  # 1.27GB, 1420 items
 /Users/tarnished/.cache/uv  # 351.2MB, 6 items
 /Users/tarnished/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f  # 2.6MB
 /Users/tarnished/Library/Caches/com.postmanlabs.mac  # 80KB, 2 items

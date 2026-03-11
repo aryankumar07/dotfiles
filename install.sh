@@ -99,16 +99,6 @@ else
   success "Node.js installed ($(node -v))"
 fi
 
-# ─── Bun ──────────────────────────────────────────────────────────────────────
-
-if command_exists bun; then
-  warn "Bun already installed ($(bun -v))"
-else
-  info "Installing Bun..."
-  curl -fsSL https://bun.sh/install | bash
-  success "Bun installed"
-fi
-
 # ─── Rust ─────────────────────────────────────────────────────────────────────
 
 if command_exists rustc; then
@@ -148,16 +138,6 @@ else
   info "Installing Tmux Plugin Manager..."
   git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
   success "TPM installed — press prefix + I inside tmux to install plugins"
-fi
-
-# ─── Go CLI tools ────────────────────────────────────────────────────────────
-
-if command_exists cobra-cli; then
-  warn "cobra-cli already installed"
-else
-  info "Installing cobra-cli..."
-  go install github.com/spf13/cobra-cli@latest
-  success "cobra-cli installed"
 fi
 
 # ─── Done ─────────────────────────────────────────────────────────────────────
