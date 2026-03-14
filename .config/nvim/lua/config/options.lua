@@ -1,6 +1,3 @@
--- Set leader key to space
-vim.g.mapleader = " "
-
 -- Use system clipboard
 vim.opt.clipboard:append("unnamedplus")
 
@@ -43,8 +40,8 @@ vim.opt.showcmd = true
 -- Use spaces instead of tabs
 vim.opt.expandtab = true
 
--- Keep 10 lines visible when scrolling
-vim.opt.scrolloff = 10
+-- Keep 8 lines visible when scrolling
+vim.opt.scrolloff = 8
 
 -- Show incremental command results in a split
 vim.opt.inccommand = "split"
@@ -85,9 +82,6 @@ vim.opt.splitright = true
 -- Keep cursor in same column when splitting
 vim.opt.splitkeep = "cursor"
 
--- Disable mouse support
--- vim.opt.mouse = ""
-
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
 
@@ -107,11 +101,7 @@ vim.api.nvim_command("command WQ wq")
 
 vim.api.nvim_command("command Wq wq")
 
--- Hide command line when not needed
--- vim.opt.cmdheight = 0
-
-vim.o.scrolloff = 8
-vim.o.sidescrolloff = 8
+vim.opt.sidescrolloff = 8
 
 vim.opt.signcolumn = 'yes'
 
@@ -120,9 +110,6 @@ vim.o.undofile = true
 
 vim.o.completeopt = "menuone,noselect"
 
--- Concealer for Neorg
-vim.o.conceallevel = 2
-
--- vim.opt.colorcolumn = "120"
-
 vim.opt.numberwidth = 1
+
+vim.o.termguicolors = true

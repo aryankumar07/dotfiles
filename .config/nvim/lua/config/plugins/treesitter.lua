@@ -5,17 +5,20 @@ return {
     require('nvim-treesitter.configs').setup({
       ensure_installed = {
         "c",
-        "html",
         "cpp",
         "typescript",
         "tsx",
         "javascript",
+        "html",
         "css",
+        "json",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
         "gitignore",
-        "prisma",
-        "sql",
-        "http",
-        "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline"
       },
 
       -- Recommendation: Set this to true to automatically install parsers
