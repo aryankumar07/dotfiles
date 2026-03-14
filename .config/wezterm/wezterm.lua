@@ -50,20 +50,24 @@ config.window_padding = {
 }
 config.window_decorations = "RESIZE"
 local home = os.getenv("HOME")
-local file = home .. "/.config/wezterm/backgrounds/zaraki.png"
-config.background = {
-  {
-    source = {
-      File = file,
+local bg_image = home .. "/.config/wezterm/backgrounds/zaraki.png"
+local f = io.open(bg_image, "r")
+if f then
+  f:close()
+  config.background = {
+    {
+      source = { File = bg_image },
+      width = "Contain",
+      hsb = {
+        hue = 0.1,
+        saturation = 0.1,
+        brightness = 0.3,
+      },
     },
-    width = "Contain",
-    hsb = {
-      hue = 0.1,
-      saturation = 0.1,
-      brightness = 0.3,
-    }
-  },
-}
+  }
+else
+  config.window_background_color = "#1e2030"
+end
 -- tmux
 config.leader = { key = "q", mods = "ALT", timeout_milliseconds = 2000 }
 config.native_macos_fullscreen_mode = true

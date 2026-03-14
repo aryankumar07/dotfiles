@@ -20,6 +20,7 @@ brew "yazi"
 brew "zoxide"
 
 cask "font-fira-code"
+cask "wezterm"
 cask "ngrok"
 cask "vlc"
 cask "aryankumar07/tap/jsawn"
