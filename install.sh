@@ -58,7 +58,7 @@ brew analytics off
 # ─── Brew Bundle ──────────────────────────────────────────────────────────────
 
 info "Running brew bundle (already-installed packages will be skipped)..."
-brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 success "Brew bundle complete"
 
 # ─── Stow dotfiles ───────────────────────────────────────────────────────────
@@ -126,6 +126,16 @@ else
   cd "$DOTFILES_DIR"
   rm -rf "$NVIM_BUILD_DIR"
   success "Neovim installed ($(nvim --version | head -1))"
+fi
+
+# ─── Claude CLI ───────────────────────────────────────────────────────────────
+
+if command_exists claude; then
+  warn "Claude CLI already installed ($(claude --version))"
+else
+  info "Installing Claude CLI..."
+  curl -fsSL https://claude.ai/install.sh | bash
+  success "Claude CLI installed"
 fi
 
 # ─── Tmux Plugin Manager (TPM) ───────────────────────────────────────────────

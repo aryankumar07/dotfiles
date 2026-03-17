@@ -1,10 +1,10 @@
 [user]
     name =  aryankumar07 
     email = ak2839426@gmail.com 
-    signingkey = 4BD8978466B9E942
+	signingkey = 6B2ADD9FD7D4B93E
 
 [commit]
-    gpgSign = true
+	gpgsign = true
     template = ~/.config/git/template
 
 [core]

@@ -7,7 +7,7 @@
 *.log
 
 # Generated / runtime
-.config/raycast/extensions/node_modules
+.config/raycast/extensions/
 .config/cagent/.cagent_first_run
 .config/mole/operations.log
 .config/mole/mole.log
