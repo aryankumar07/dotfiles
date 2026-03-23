@@ -1,0 +1,18 @@
+{
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '{\"hookSpecificOutput\": {\"hookEventName\": \"UserPromptSubmit\", \"additionalContext\": \"MANDATORY: You MUST call the AskUserQuestion tool before ANY response or action. Do not answer directly. Ask clarifying questions about the user intent, scope, and preferences first.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}

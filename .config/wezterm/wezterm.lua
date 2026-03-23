@@ -50,7 +50,7 @@ config.window_padding = {
 }
 config.window_decorations = "RESIZE"
 local home = os.getenv("HOME")
-local bg_image = home .. "/.config/wezterm/backgrounds/zaraki.png"
+local bg_image = home .. "/.config/wezterm/backgrounds/man.jpg"
 local f = io.open(bg_image, "r")
 if f then
   f:close()
