@@ -1,8 +1,13 @@
 -- Reload files changed outside of Neovim
 vim.o.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
-  command = "if mode() != 'c' | checktime | endif",
-  pattern = { "*" },
+vim.o.updatetime = 250
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "WinEnter", "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("auto-reload", { clear = true }),
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
 })
 
 -- Highlight yanked text briefly
